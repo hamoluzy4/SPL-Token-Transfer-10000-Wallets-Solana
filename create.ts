@@ -23,8 +23,12 @@ const createWallets = (): Keypair[][] => {
     return wallets;
 };
 
+
 // Usage
 const walletArray = createWallets();
+
 console.log(walletArray);
+
 console.log(base58.encode(walletArray[0][3].secretKey)); // Logs the 2D array of Keypairs
+
 console.log(`Total wallets: ${walletArray.length * walletArray[0].length}`); // Should log 2000

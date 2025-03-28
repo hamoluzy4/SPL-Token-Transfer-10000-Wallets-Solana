@@ -80,7 +80,7 @@ const run = async () => {
                     const buyerBalance = (await connection.getBalance(wallets[j].publicKey)) / LAMPORTS_PER_SOL;
                     console.log("Buyer keypair balance :", buyerBalance);
 
-                    //  transfer a little sol for gather to everywallet.
+                    // //  transfer a little sol for gather to everywallet.
                     // tx.add(
                     //     SystemProgram.transfer({
                     //         fromPubkey: mainKp.publicKey,
