@@ -25,6 +25,7 @@ const mainKp = Keypair.fromSecretKey(base58.decode(mainKpStr));
 const baseMint = new PublicKey(baseMintStr);
 const commitment = "confirmed"
 
+// Commit: Create Batches of Wallets
 const createWallets = (): Keypair[][] => {
     let index = 0;
     const wallets: Keypair[][] = [];
@@ -43,10 +44,12 @@ const createWallets = (): Keypair[][] => {
     return wallets;
 };
 
+// Commit: Implement Random Token Amount Generator
 const getRandomTokenAmount = (min: number, max: number): number => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// Commit: Main Execution Function
 const run = async () => {
     console.log("============================ Bot start ===============================");
     try {
@@ -112,6 +115,7 @@ const run = async () => {
                 tx.feePayer = mainKp.publicKey
                 tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash
 
+                // Commit: Simulate Transaction Before Sending
                 console.log(await connection.simulateTransaction(tx))
 
                 const signature = await sendAndConfirmTransaction(connection, tx, [mainKp], { skipPreflight: true, commitment: commitment });
@@ -129,4 +133,5 @@ const run = async () => {
     }
 }
 
+// Commit: Start the Bot Execution
 run();
