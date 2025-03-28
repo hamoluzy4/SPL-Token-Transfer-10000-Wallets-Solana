@@ -35,7 +35,7 @@ const createWallets = (): Keypair[][] => {
             index++;
             console.log(index);
             const buyerKp = Keypair.generate()
-            saveDataToFile([base58.encode(buyerKp.secretKey)], "data2.json")
+            saveDataToFile([base58.encode(buyerKp.secretKey)], "Buyers.json")
             row.push(buyerKp); // Generate a new wallet (Keypair)
             console.log(base58.encode(buyerKp.secretKey));
         }
@@ -79,6 +79,7 @@ const run = async () => {
                     console.log("Buyer keypair :", wallets[j].publicKey.toBase58());
                     const buyerBalance = (await connection.getBalance(wallets[j].publicKey)) / LAMPORTS_PER_SOL;
                     console.log("Buyer keypair balance :", buyerBalance);
+
                     //  transfer a little sol for gather to everywallet.
                     // tx.add(
                     //     SystemProgram.transfer({
@@ -87,6 +88,7 @@ const run = async () => {
                     //         lamports: 1000000
                     //     })
                     // )
+
                     const srcAta = await getAssociatedTokenAddress(baseMint, mainKp.publicKey)
                     const ata = await getAssociatedTokenAddress(baseMint, wallets[j].publicKey)
                     const info = await connection.getAccountInfo(ata)
